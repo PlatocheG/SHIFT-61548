@@ -129,6 +129,7 @@ API доступно по http://127.0.0.1:8000 либо по http://localhost:8
 
 Для тестирования в ручном режиме можно использовать Swagger UI (http://127.0.0.1:8000/docs# либо http://localhost:8000/docs#).
 
+
 ## Docker:
 
 Создание docker image:
@@ -140,3 +141,5 @@ docker build -t shift-61548 .
 ```
 docker run -dp 127.0.0.1:8000:8000 shift-61548
 ```
+
+
