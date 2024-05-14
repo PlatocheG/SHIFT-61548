@@ -1,6 +1,8 @@
 FROM python:3.12
-RUN mkdir /app
-WORKDIR /app
+RUN pip install poetry
+RUN mkdir -p /app
 COPY . /app
-RUN pip install -r requirements.txt
-CMD python ./main.py
+WORKDIR /app
+
+RUN poetry install
+CMD ["poetry", "run", "python", "-m", "main"]

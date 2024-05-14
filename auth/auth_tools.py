@@ -5,23 +5,23 @@ import jwt
 from jwt import PyJWTError
 from fastapi import HTTPException, status
 
-from config import SECRET_KEY, ALGORITHM, EXP_TIME_SEC
+from config import JWT_SECRET_KEY, JWT_ALGORITHM, JWT_EXP_TIME_SEC
 
 #----------------------------------------------------------------------------------------------------------------------------------------
 # JWT get-check :
 
 def create_jwt(
         payload: dict,
-        key: str = SECRET_KEY,
-        algorithm: str = ALGORITHM,
-        exp_timedelta: int = EXP_TIME_SEC
+        key: str = JWT_SECRET_KEY,
+        algorithm: str = JWT_ALGORITHM,
+        exp_timedelta: int = JWT_EXP_TIME_SEC
 ) -> str:
     exp_datetime = datetime.datetime.now(datetime.UTC) + datetime.timedelta(seconds=exp_timedelta)
     data = payload.copy()
     data.update({"exp": exp_datetime})
     return jwt.encode(data, key, algorithm)
 
-def validate_jwt(token: str, key: str = SECRET_KEY, algorithm: str = ALGORITHM):
+def validate_jwt(token: str, key: str = JWT_SECRET_KEY, algorithm: str = JWT_ALGORITHM):
     try:
         payload = jwt.decode(token, key, algorithms=[algorithm])
     except PyJWTError as exp:
